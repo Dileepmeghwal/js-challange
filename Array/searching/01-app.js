@@ -233,3 +233,138 @@ for (const d of inputData) {
   }
   console.log(o);
 }
+
+const data = inputData;
+let first = data[2];
+let second = data[1];
+let third = data[3];
+console.log("---------------------------");
+
+console.log(first.itemName);
+
+/****************
+ *  Sort a binary array
+ * *******************/
+
+// function sortBinary(arr = []) {
+//   if (!arr) return;
+//   let j = -1;
+//   for (let i = 0; i < arr.length; i++) {
+//     console.log(arr[i]);
+//     if (arr[i] < 1) {
+//       j++;
+//       let temp = a[j];
+//       a[j] = a[i];
+//       a[i] = temp;
+//     }
+//     for (let i = 0; i < arr.length; i++) {
+//       console.log(arr[i]);
+//     }
+//   }
+// }
+
+// let a1 = [1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0];
+// console.log(sortBinary(a1));
+
+function findLearShip(arr) {
+  let leaders = [];
+  let maxFromRight = arr[arr.length - 1];
+  leaders.push(maxFromRight);
+  for (let i = arr.length - 2; i >= 0; i--) {
+    if (arr[i] >= maxFromRight) {
+      maxFromRight = arr[i];
+      leaders.push(arr[i]);
+    }
+  }
+  return leaders.reverse();
+}
+
+const arrX = [16, 17, 4, 3, 5, 2];
+console.log(findLearShip(arrX));
+
+/****************
+ *  Star pattern
+ * *******************/
+
+function rightAngleTringle(n) {
+  for (let i = 1; i <= n; i++) {
+    console.log(`*`.repeat(i));
+  }
+}
+rightAngleTringle(5);
+
+function total(n) {
+  let sum = 0;
+  for (let i = 1; i <= n; i++) {
+    console.log(i);
+
+    sum += i;
+  }
+  return sum;
+}
+console.log(total(5));
+
+function concatData(arr) {
+  let obj = {};
+  for (const d of arr) {
+    if (obj[d._id]) {
+      obj[d._id].machineUsed += Number(d.machineUsed) || 0;
+      obj[d._id]["machineBuild"].push({
+        ...d.machineBuild,
+        itemName: d.itemName,
+      });
+    } else {
+      obj[d._id] = {
+        ...d,
+        machineUsed: d?.machineUsed,
+        machineBuild: [{ ...d.machineBuild, itemName: d.itemName }],
+      };
+    }
+  }
+
+  return obj;
+}
+const d = [
+  {
+    _id: "A1",
+    itemName: "Item 1",
+    machineUsed: 1,
+    machineBuild: { type: "Type A", cost: 100 },
+  },
+  {
+    _id: "A2",
+    itemName: "Item 2",
+    machineUsed: 5,
+    machineBuild: { type: "Type B", cost: 200 },
+  },
+  {
+    _id: "A1",
+    itemName: "Item 1 Updated",
+    machineUsed: 3,
+    machineBuild: { type: "Type C", cost: 150 },
+  },
+];
+console.log(concatData(d));
+
+/*********************:
+ * Find Duplicates in an Array of Numbers
+ * **************************/
+
+function Findduplicates(arr) {
+  const obj = {};
+  const duplicates = [];
+
+  for (const num of arr) {
+    if (obj[num]) {
+      obj[num]++;
+      if (obj[num] == 2) {
+        duplicates.push(num);
+      }
+    } else {
+      obj[num] = 1;
+    }
+  }
+  return duplicates;
+}
+
+console.log(Findduplicates([1, 2, 3, 4, 5, 2, 3, 6, 7, 8, 3]));
